@@ -24,9 +24,8 @@ li:hover {
   background: #e3f2fd;
   padding: 16px 24px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(33,150,243,0.08);
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.08);
   align-items: center;
-}
 }
 
 .filtros label {
@@ -35,7 +34,8 @@ li:hover {
   flex-direction: column;
   gap: 4px;
 }
-input[type="text"], input[type="number"] {
+input[type="text"],
+input[type="number"] {
   padding: 8px;
   border: 1px solid #bdbdbd;
   border-radius: 4px;
@@ -44,10 +44,10 @@ input[type="text"], input[type="number"] {
   transition: border 0.2s;
 }
 
-input[type="text"]:focus, input[type="number"]:focus {
+input[type="text"]:focus,
+input[type="number"]:focus {
   border-color: #1976d2;
   outline: none;
-}
 }
 
 .paginacion {

@@ -88,6 +88,7 @@ export class PeliculasComponent implements OnInit {
   }
 
   verDetalles(pelicula: Pelicula) {
-    this.router.navigate(['/detalle', pelicula.id]);
+    const index = this.peliculas.indexOf(pelicula);
+    this.router.navigate(['/detalle', index + 1]);
   }
 }

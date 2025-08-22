@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Pelicula {
-  id: number;
   titulo: string;
   director: string;
   fechaEstreno: number;

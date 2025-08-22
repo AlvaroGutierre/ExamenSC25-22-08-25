@@ -37,8 +37,16 @@ namespace ExamenSC25_AlvaroGutierrez.Controllers
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
+            var items = peliculas.Select(p => new PeliculaDto
+            {
+                Titulo = p.Titulo,
+                Director = p.Director,
+                FechaEstreno = p.FechaEstreno,
+                Genero = p.Genero,
+                Duracion = p.Duracion
+            }).ToList();
             return new {
-                items = peliculas,
+                items = items,
                 totalCount = total,
                 totalPages = totalPages,
                 page = page,
@@ -48,18 +56,36 @@ namespace ExamenSC25_AlvaroGutierrez.Controllers
 
         // GET: api/peliculas/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pelicula>> GetPelicula(int id)
+        public async Task<ActionResult<PeliculaDto>> GetPelicula(int id)
         {
             var pelicula = await _context.Peliculas.FindAsync(id);
             if (pelicula == null)
                 return NotFound();
-            return pelicula;
+            var dto = new PeliculaDto
+            {
+                Titulo = pelicula.Titulo,
+                Director = pelicula.Director,
+                FechaEstreno = pelicula.FechaEstreno,
+                Genero = pelicula.Genero,
+                Duracion = pelicula.Duracion
+            };
+            return dto;
         }
 
         // POST: api/peliculas
         [HttpPost]
-        public async Task<ActionResult<Pelicula>> PostPelicula(Pelicula pelicula)
+        public async Task<ActionResult<Pelicula>> PostPelicula([FromBody] PeliculaDto peliculaDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var pelicula = new Pelicula
+            {
+                Titulo = peliculaDto.Titulo,
+                Director = peliculaDto.Director,
+                FechaEstreno = peliculaDto.FechaEstreno,
+                Genero = peliculaDto.Genero,
+                Duracion = peliculaDto.Duracion
+            };
             _context.Peliculas.Add(pelicula);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetPeliculas), new { id = pelicula.Id }, pelicula);
@@ -67,11 +93,18 @@ namespace ExamenSC25_AlvaroGutierrez.Controllers
 
         // PUT: api/peliculas/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPelicula(int id, Pelicula pelicula)
+        public async Task<IActionResult> PutPelicula(int id, [FromBody] PeliculaDto peliculaDto)
         {
-            if (id != pelicula.Id)
-                return BadRequest();
-            _context.Entry(pelicula).State = EntityState.Modified;
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var pelicula = await _context.Peliculas.FindAsync(id);
+            if (pelicula == null)
+                return NotFound();
+            pelicula.Titulo = peliculaDto.Titulo;
+            pelicula.Director = peliculaDto.Director;
+            pelicula.FechaEstreno = peliculaDto.FechaEstreno;
+            pelicula.Genero = peliculaDto.Genero;
+            pelicula.Duracion = peliculaDto.Duracion;
             await _context.SaveChangesAsync();
             return NoContent();
         }
