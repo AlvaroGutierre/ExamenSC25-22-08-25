@@ -32,12 +32,17 @@
   <li
     *ngFor="let pelicula of peliculas"
     (click)="verDetalles(pelicula)"
-    style="cursor: pointer"
+    class="pelicula-item"
   >
-    <strong>{{ pelicula.titulo }}</strong> ({{ pelicula.fechaEstreno }})<br />
-    Director: {{ pelicula.director }}<br />
-    Género: {{ pelicula.genero }}<br />
-    Duración: {{ pelicula.duracion }} min
+    <div class="fila">
+      <span class="genero">{{ pelicula.genero }}</span>
+      <span class="director">{{ pelicula.director }}</span>
+      <span class="fecha">{{ pelicula.fechaEstreno }}</span>
+      <span class="duracion">{{ pelicula.duracion }} min</span>
+      <span class="titulo"
+        ><strong>{{ pelicula.titulo }}</strong></span
+      >
+    </div>
   </li>
 </ul>
 
