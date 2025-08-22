@@ -1,0 +1,6 @@
+@ExamenSC25_AlvaroGutierrez_HostAddress = http://localhost:5285
+
+GET {{ExamenSC25_AlvaroGutierrez_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

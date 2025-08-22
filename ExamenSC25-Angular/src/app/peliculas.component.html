@@ -1,0 +1,54 @@
+<div class="filtros">
+  <label
+    >Género:
+    <input
+      [(ngModel)]="genero"
+      (input)="onFilterChange()"
+      placeholder="Género"
+    />
+  </label>
+  <label
+    >Director:
+    <input
+      [(ngModel)]="director"
+      (input)="onFilterChange()"
+      placeholder="Director"
+    />
+  </label>
+  <label
+    >Año:
+    <input
+      type="number"
+      [(ngModel)]="fechaEstreno"
+      (input)="onFilterChange()"
+      placeholder="Año"
+    />
+  </label>
+</div>
+
+<div *ngIf="loading">Cargando...</div>
+
+<ul *ngIf="!loading">
+  <li
+    *ngFor="let pelicula of peliculas"
+    (click)="verDetalles(pelicula)"
+    style="cursor: pointer"
+  >
+    <strong>{{ pelicula.titulo }}</strong> ({{ pelicula.fechaEstreno }})<br />
+    Director: {{ pelicula.director }}<br />
+    Género: {{ pelicula.genero }}<br />
+    Duración: {{ pelicula.duracion }} min
+  </li>
+</ul>
+
+<div class="paginacion">
+  <button (click)="goToFirstPage()" [disabled]="page === 1">Primera</button>
+  <button (click)="prevPage()" [disabled]="page === 1">Anterior</button>
+  <span>Página {{ page }} de {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="page === totalPages">
+    Siguiente
+  </button>
+  <button (click)="goToLastPage()" [disabled]="page === totalPages">
+    Última
+  </button>
+</div>

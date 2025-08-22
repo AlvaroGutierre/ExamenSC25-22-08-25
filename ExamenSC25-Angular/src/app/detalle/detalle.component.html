@@ -1,0 +1,17 @@
+<h2>Detalle de la Película</h2>
+<ng-container *ngIf="pelicula as p; else cargando">
+  <ul>
+    <li><strong>ID:</strong> {{ p.id }}</li>
+    <li><strong>Título:</strong> {{ p.titulo }}</li>
+    <li><strong>Director:</strong> {{ p.director }}</li>
+    <li><strong>Género:</strong> {{ p.genero }}</li>
+    <li><strong>Duración:</strong> {{ p.duracion }} min</li>
+    <li><strong>Fecha de estreno:</strong> {{ p.fechaEstreno }}</li>
+  </ul>
+  <button (click)="volverLista()" style="margin-top: 16px">
+    Volver a la lista
+  </button>
+</ng-container>
+<ng-template #cargando>
+  <p>Cargando datos de la película...</p>
+</ng-template>
