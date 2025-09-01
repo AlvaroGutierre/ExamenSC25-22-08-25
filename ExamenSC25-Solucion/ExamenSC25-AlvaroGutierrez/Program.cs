@@ -5,9 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-// Configuración de DbContext con SQLite
+// Configuración de DbContext con SQLite usando la cadena de conexión de appsettings.json
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=peliculas.db"));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
